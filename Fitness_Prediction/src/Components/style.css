@@ -1,0 +1,138 @@
+/* Fullscreen Background */
+.home-container {
+  height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+/* Gradient Text Effect */
+.text-gradient {
+  background: linear-gradient(45deg, #ff8c00, #ff2d55);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Quote Animation */
+.quote {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+/* Delayed Animation for Second Quote */
+.quote:nth-of-type(2) {
+  animation-delay: 1s;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar Styling */
+.navb {
+  background: rgba(5, 5, 5, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10;
+  color: white;
+ width: 100%;
+ position: fixed;
+ top:0;
+ 
+}
+
+/* Gradient Overlay */
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to left, rgba(226, 224, 224, 0.4), rgba(8, 8, 8, 0.9));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Carousel container fix */
+
+/* Video/Slider wrapper */
+
+/* Dropdown Styles */
+.dropdown-item:hover {
+  background-color: rgb(5, 4, 4);
+  color: #ff2d55 !important;
+}
+
+.dropdown:hover > .dropdown-menu,
+.dropdown-menu > .dropdown-item,
+.dropend:hover > .dropdown-menu {
+  display: block;
+  margin-top: 0.125em;
+  margin-left: 0.125em;
+}
+
+.tn {
+  text-decoration: none;
+}
+.i1 {
+position: relative;
+}
+.ig1{
+  width: 40%;
+  /* border:1px solid  #ff8c00; */
+  position: absolute;
+  left: 15%;
+  top: 25%;
+  color:white;
+  z-index: 1;
+  font-family: sans-serif;
+}
+.ig1 p{
+  font-size: 16px;
+  padding-right: 100px;
+}
+.ig1 h2 , .ig1 p{
+  opacity: 0;
+  transform: translateY(-100px);
+  animation: fadeInUp 2s ease-out forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}
+.bt{
+ margin-top: 10px;
+  border-radius: 0%;
+  opacity: 0;
+  transform: translateX(100px);
+  animation:fadeUp  2s ease-out forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+footer ul li {
+  margin-bottom: 6px;
+}
+
+footer i {
+  transition: color 0.3s;
+}
+
+footer i:hover {
+  color: #e60023;
+}
+
