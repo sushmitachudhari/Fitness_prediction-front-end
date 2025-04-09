@@ -26,7 +26,7 @@ const cardData = [
 const FeatureCards = () => {
   return (
     <div className="container py-5">
-      <div className="row">
+      {/* <div className="row">
         {cardData.map((card, index) => (
           <div className="col-md-4 mb-4" key={index}>
             <div
@@ -43,7 +43,10 @@ const FeatureCards = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+
+
+      <h3>Personalize Fitness System</h3><p>remaining</p>
     </div>
   );
 };

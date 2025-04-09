@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, Outlet, useNavigate,useLocation } from "react-router-dom";
 import "./style.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComments,faEyeSlash,faSignOut, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 const UserDashBoard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -45,13 +47,17 @@ const location = useLocation();
       {/* Sidebar + Main Content */}
       <div className="user-body">
         <div className={`user-sidebar ${sidebarOpen ? "open" : "closed"}`}>
-            <center><h5>User DashBoard</h5></center>
-          <div className="sidebar-section">
-            <p><Link to="update-profile">Update Profile</Link></p>
-            <p><Link to="workout-plans">Workout Plans</Link></p>
-            <p><Link to="feedback">Feedback</Link></p>
-            <p onClick={handleLogout} style={{ cursor: "pointer", color: "#ff4d4d" }}>Logout</p>
+  
+          <div className="sidebar-section sc">
+            <p><Link to="update-profile"><FontAwesomeIcon icon={faUserEdit} className="me-2"></FontAwesomeIcon>Update Profile</Link></p>
+            <hr className="sidebar-divider" />
+            <p><Link to="workout-plans"><FontAwesomeIcon icon={faEyeSlash} className="me-2"></FontAwesomeIcon>See Workout Plans</Link></p>
+            <hr className="sidebar-divider" />
+            <p><Link to="give-feedback"><FontAwesomeIcon icon={faComments} className="me-2"></FontAwesomeIcon>Feedback</Link></p>
+            
           </div>
+          <hr className="sidebar-divider" />
+          <div className="sidebar-category" onClick={handleLogout}><FontAwesomeIcon icon={faSignOut} className="me-2"></FontAwesomeIcon>Logout</div>
         </div>
 
         <div className={`user-content ${sidebarOpen ? "shifted" : ""}`}>
