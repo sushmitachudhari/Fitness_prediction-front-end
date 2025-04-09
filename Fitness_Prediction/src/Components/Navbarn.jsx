@@ -15,7 +15,7 @@ const Navbarn = ({ userRole }) => {
   return (<>
     
   <div>
-  <nav className="navbar navb navbar-expand-lg bg-black px-3 ">
+  <nav className="navbar navb navbar-expand-lg bg-black position-fixed px-3 ">
       <div className="container-fluid">
         {/* Brand */}
         <NavLink className="navbar-brand fw-bold text-light" to="/">

@@ -6,7 +6,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 function Slider() {
     return(
         <>
-        <div id="carouselExampleControls" style={{width:"100%",height:"600px"}} className="carousel slide sld" data-bs-ride="carousel">
+        <div id="carouselExampleControls " style={{width:"100%",height:"600px"}} className="carousel container-lg slide sld" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active ">
             <img src="\src\assets\headph_wem.jpg" style={{backgroundColor:"red",width:"200px", height:"500px"}} className="d-block w-100" alt="jhjsfd"/>

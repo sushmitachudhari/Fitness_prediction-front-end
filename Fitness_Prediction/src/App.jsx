@@ -1,34 +1,65 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbarn from "./Components/Navbarn";
-import Home from "./Components/Home"
+import Home from "./Components/Home";
 import AdminLogin from "./Components/AdminLogin";
 import UserLogin from "./Components/UserLogin";
 import UserRegister from "./Components/UserRegister";
-import Footer from "./Components/Footer";
+import AdminDashBoard from "./Components/AdminDashBoard";
+import UserDashBoard from "./Components/UserDashBoard";
 
-function App() {
-  const [userRole, setUserRole] = useState("user"); // "admin" or "user"
+function AppContent() {
+  const location = useLocation();
+  const [userRole, setUserRole] = useState("user"); // or "admin"
+
+  // Routes where you want to hide the navbar
+  const hideNavbarRoutes = ["/", "/history","/predictions/calories","/predictions/workout-plan","/history","/account/admin","/users/register","/users/login"];
+  
+  hideNavbarRoutes.sty
+  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
-    <BrowserRouter>
-      <Navbarn userRole={userRole} />
+    <>
+      {shouldHideNavbar && <Navbarn userRole={userRole} />}
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home />} />
         <Route path="/predictions/calories" element={<h1>Calories Burned</h1>} />
         <Route path="/predictions/workout-plan" element={<h1>Workout Plan</h1>} />
-        <Route path="/history" element={<h3>History</h3>} />
-        <Route path="/account/admin" element={<AdminLogin/>} />
-        <Route path="/account/user" element={<h2>Hello</h2>} />
-        <Route path="/users" element={<h1>Users</h1>} />
-        <Route path="/users/register" element={<UserRegister/>} />
-        <Route path="/users/login" element={<UserLogin/>} />
+        <Route path="/history" element={<><br /><br /><br /><h3>History</h3></>} />
+        <Route path="/account/admin" element={<AdminLogin />} />
+        <Route path="/account/admin/admin-dashboard" element={<AdminDashBoard />}>
+   <Route path="add-user" element={<h3>Good Morning</h3>} />
+   <Route path="update-user" element={<h3>update user</h3>} />
+  <Route path="delete-user" element={<h3>delete-user</h3>} />
+  <Route path="view-users" element={<h3>View user</h3>} />
+  <Route path="add-workout" element={<h3>add-workout</h3>} />
+  <Route path="update-workout" element={<h3>update-workout</h3>} />
+  <Route path="view-workouts" element={<h3>View-Workout</h3>} />
+  <Route path="delete-workout" element={<h3>delete workout</h3>} /> 
+  <Route path="view-feedback" element={<h3>See All feedback</h3>} />
+</Route>
+
+
+        <Route path="/users/login/user-dashboard" element={<UserDashBoard/>} >
+        <Route path="update-profile" element={<h1>Update Your Profile</h1>}/>
+        <Route path="workout-plans" element={<h3>See WorkOut Plans</h3>} />
+        <Route path="give-feedback" element={<h3>Give feedback here</h3>} />
+        </Route>
+
+        <Route path="/users/register" element={<UserRegister />} />
+        <Route path="/users/login" element={<UserLogin />} />
         <Route path="/user-history" element={<h1>User History</h1>} />
-        
       </Routes>
-      <Footer/>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

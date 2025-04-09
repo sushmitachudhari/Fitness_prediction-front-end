@@ -28,15 +28,14 @@ function AdminLogin() {
 
     setError(""); // Clear error
     alert("Login Successful! Redirecting to Admin Dashboard");
-    navigate("/admin-dashboard"); // Redirect to Dashboard
+    navigate("/account/admin/admin-dashboard"); // Redirect to Dashboard
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100" 
-         style={{ backgroundColor: "#f8f8f8" }}>
-      <div className="card p-5 shadow-lg border-0" 
-           style={{ width: "500px", borderRadius: "10px", backgroundColor: "white" }}>
-        <h2 className="text-center fw-bold mb-2" style={{ color: "#333" }}>Admin Login</h2>
+    <div className="mainU container-fluid">
+    <div className="container d-flex justify-content-center align-items-center   tw">
+      <div className="card p-5 shadow-lg border-0 ">
+        <h2 className="text-center fw-bold mb-2" >Admin Login</h2>
         
         {/* Error Message */}
         {error && <div className="alert alert-danger text-center">{error}</div>}
@@ -71,14 +70,18 @@ function AdminLogin() {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn w-100 p-3 fw-bold" 
+          <button type="submit" className="btn w-100 p-3 fw-bold bg-black" 
             style={{ borderRadius: "8px", backgroundColor: "#333", color: "white", transition: "0.3s" }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = "#555")}
-            onMouseOut={(e) => (e.target.style.backgroundColor = "#333")}
+            
           >
             Login
           </button>
         </form>
+      </div>
+    </div>
+    <div className="container col-6 d-flex on">
+       <img src="\src\assets\two.png"></img>
+     
       </div>
     </div>
   );
