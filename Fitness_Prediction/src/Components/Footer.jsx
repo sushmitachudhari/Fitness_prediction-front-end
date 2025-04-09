@@ -6,11 +6,11 @@ import "./style.css"; // Import additional styles
 function Footer() {
   return (<>
   
-    <footer className=" pt-5">
-      <div className="container">
+    <footer>
+      {/* <div className="container">
         <div className="row text-start">
 
-          {/* Column 1 - About */}
+          // {/* Column 1 - About 
           <div className="col-md-3 mb-4 coll">
             <h5 className="text-uppercase fw-bold ">Fitness Tracker</h5>
             <p className="small">
@@ -25,7 +25,7 @@ function Footer() {
             </div>
           </div>
 
-          {/* Column 2 - Latest Posts */}
+          {/* Column 2 - Latest Posts 
           <div className="col-md-3 mb-4 coll">
             <h6 className=" text-uppercase  pb-1 ">Latest Posts</h6>
             <div className="d-flex mb-2">
@@ -44,7 +44,7 @@ function Footer() {
             </div>
           </div>
 
-          {/* Column 3 - Classes */}
+          {/* Column 3 - Classes 
           <div className="col-md-3 mb-4 coll">
             <h6 className="text-uppercase   pb-1">Our Activity</h6>
             <ul className="list-unstyled small">
@@ -57,7 +57,7 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 - Newsletter */}
+          {/* Column 4 - Newsletter 
           <div className="col-md-3 mb-4 coll">
             <h6 className="text-uppercase   pb-1">Newsletter</h6>
             <p className="small">Subscribe to keep up with latest news and updates.</p>
@@ -69,12 +69,9 @@ function Footer() {
         </div>
 
         
-      </div>
-      <div className=" ft ">
+      </div> */}
           <p>This Website is maintain by &copy; Fitness System 2025 </p>
-        </div>
     </footer>
-
   </>);
 }
 export default Footer;

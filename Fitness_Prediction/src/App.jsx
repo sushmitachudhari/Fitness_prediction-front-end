@@ -9,6 +9,7 @@ import UserLogin from "./Components/UserLogin";
 import UserRegister from "./Components/UserRegister";
 import AdminDashBoard from "./Components/AdminDashBoard";
 import UserDashBoard from "./Components/UserDashBoard";
+import UpdateProfile from "./Components/AdminDashBoardOp/UpdateProfile";
 
 function AppContent() {
   const location = useLocation();
@@ -41,10 +42,9 @@ function AppContent() {
   <Route path="delete-workout" element={<h3>delete workout</h3>} /> 
   <Route path="view-feedback" element={<h3>See All feedback</h3>} />
 </Route>
-
-
+         <Route path="/workout/running" element={<h2>WorkOutpage running</h2>}></Route>
         <Route path="/users/login/user-dashboard" element={<UserDashBoard/>} >
-        <Route path="update-profile" element={<h1>Update Your Profile</h1>}/>
+        <Route path="update-profile" element={<UpdateProfile/>}/>
         <Route path="workout-plans" element={<h3>See WorkOut Plans</h3>} />
         <Route path="give-feedback" element={<h3>Give feedback here</h3>} />
         </Route>

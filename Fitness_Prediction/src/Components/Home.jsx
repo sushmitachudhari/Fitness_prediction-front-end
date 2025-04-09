@@ -76,7 +76,7 @@ function Home() {
   </div>
 </div>
 <FeatureCards/>
-<TestimonialSection/>
+{/* <TestimonialSection/> */}
       <WorkoutSlider/>
       <Footer/>
   </>

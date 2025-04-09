@@ -6,11 +6,11 @@ import { faUserPlus, faUserEdit, faUserMinus, faUsers , faDumbbell,
   faPersonRunning, 
   faHandFist, 
   faClipboardList, 
-  faRepeat, 
   faUser,
-  faPerson,
   faPersonWalking,
-  faCommentDots} from '@fortawesome/free-solid-svg-icons';
+  faCommentDots,
+  faLock,
+  faSignOut} from '@fortawesome/free-solid-svg-icons';
 
 
 const AdminDashBoard = () => {
@@ -63,7 +63,7 @@ const AdminDashBoard = () => {
               User  {userMenuOpen ? "▾" : "▸"}
             </div>
             <ul className={`submenu ${userMenuOpen ? "open" : ""}`}>
-              <li><Link to="add-user">   <FontAwesomeIcon icon={faUserPlus} className="me-2" />Add User</Link></li>
+              <li><Link to="add-user"><FontAwesomeIcon icon={faUserPlus} className="me-2" />Add User</Link></li>
               <li><Link to="update-user"><FontAwesomeIcon icon={faUserEdit} className="me-2" />Update User</Link></li>
               <li><Link to="delete-user"><FontAwesomeIcon icon={faUserMinus} className="me-2" />Delete User</Link></li>
               <li><Link to="view-users"><FontAwesomeIcon icon={faUsers} className="me-2" />View All Users</Link></li>
@@ -86,9 +86,26 @@ const AdminDashBoard = () => {
             </ul>
           </div>
           <hr className="sidebar-divider" />
-         <div className="sidebar-category"><p><Link to="view-feedback"><FontAwesomeIcon icon={faCommentDots} className="me-2"/>View FeedBack</Link></p></div>
+          {/* User Menu */}
+          <div className="sidebar-section">
+            <div
+              className="sidebar-category"
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+            ><FontAwesomeIcon icon={faUser} className="me-2"/>
+              WorkOut Calaries  {userMenuOpen ? "▾" : "▸"}
+            </div>
+            <ul className={`submenu ${userMenuOpen ? "open" : ""}`}>
+              <li><Link to="add-user">   <FontAwesomeIcon icon={faUserPlus} className="me-2" />Add User</Link></li>
+              <li><Link to="update-user"><FontAwesomeIcon icon={faUserEdit} className="me-2" />Update User</Link></li>
+              <li><Link to="delete-user"><FontAwesomeIcon icon={faUserMinus} className="me-2" />Delete User</Link></li>
+              <li><Link to="view-users"><FontAwesomeIcon icon={faUsers} className="me-2" />View All Users</Link></li>
+            </ul>
+          </div>
           <hr className="sidebar-divider" />
-          <div className="sidebar-category" onClick={handleLogout}>Logout</div>
+          
+         <div className="sidebar-category sc"><Link to="view-feedback"><FontAwesomeIcon icon={faCommentDots} className="me-2"/>View FeedBack</Link></div>
+          <hr className="sidebar-divider" />
+          <div className="sidebar-category" onClick={handleLogout}><FontAwesomeIcon icon={faSignOut} className="me-2"></FontAwesomeIcon>Logout</div>
         </div>
 
         {/* Main content */}
