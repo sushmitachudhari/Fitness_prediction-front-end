@@ -3,11 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function UserRegister(){
   return(
-    <div className="container mt-5">
-    <div className="row justify-content-center">
+    
+    
+    <div className="container-fluid  ur" >
+    <div className="row justify-content-center ">
       <div className="col-md-6">
-        <div className="card shadow-lg">
-          <div className="card-body">
+        <div className="card shadow-lg hh">
+          <div className="card-body ">
             <h3 className="card-title text-center mb-4">User Registration</h3>
             <form>
               <div className="mb-3">
@@ -34,9 +36,9 @@ function UserRegister(){
                 <label for="weight" className="form-label">Weight (kg)</label>
                 <input type="number" className="form-control" id="weight" placeholder="Enter your weight" required/>
               </div>
-  
+              <center><a href="/users/login">already have Login?</a><a href="/users/register">register</a></center>
               <div className="d-grid">
-                <button type="submit" className="btn btn-dark">Register</button>
+                <button type="submit" className="btn bg-black text-light">Register</button>
               </div>
             </form>
           </div>
