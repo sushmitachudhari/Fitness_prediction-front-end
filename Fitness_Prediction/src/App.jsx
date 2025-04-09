@@ -23,6 +23,7 @@ function AppContent() {
 
   return (
     <>
+    <h1>Hello I am in </h1>
       {shouldHideNavbar && <Navbarn userRole={userRole} />}
       <Routes>
         <Route path="/" element={<Home />} />
