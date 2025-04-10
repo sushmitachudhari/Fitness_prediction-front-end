@@ -68,14 +68,14 @@ position: relative;
   font-family: sans-serif;
 }
 .ig1 p{
-  font-size: 16px;
+  font-size: 10rem;
   padding-right: 100px;
 }
 .ig1 h2{
   font-size: clamp(1.5rem, 2vw + 1rem, 3rem);
 }
 .ig1 p{
-  font-size: 1rem;
+  font-size: 1em;
 }
 .ig1 h2 , .ig1 p{
   opacity: 0;
@@ -166,7 +166,7 @@ footer .coll h5::before , h6::before{
 
 
 /* Testimaonial  code */
-.testimonial-section {
+/* .testimonial-section {
   background-color: #f7f7fb;
 }
 
@@ -202,10 +202,10 @@ footer .coll h5::before , h6::before{
   padding: 8px 12px;
   border-radius: 50%;
   font-weight: bold;
-}
+} */
 
 /* Feature cards  */
-.feature-card {
+/* .feature-card {
   height: 100%;
   background-size: cover;
   background-position: center;
@@ -229,7 +229,14 @@ footer .coll h5::before , h6::before{
 .feature-icon {
   font-size: 3rem;
   color: white;
+} */
+
+.fc{
+  margin: 40px auto !important;
+ background-color: rgb(244, 243, 243);
+ box-shadow: 0px 0px 20px rgba(94, 94, 94, 0.4);
 }
+
 /* Admin login */
 .admin-login-page {
   width: 60%;
@@ -321,7 +328,7 @@ footer .coll h5::before , h6::before{
 }
 
 /* user Login  */
-/* Admin login */
+
 .user-login-page {
   width: 60%;
   min-height: 100vh;
@@ -480,9 +487,11 @@ footer .coll h5::before , h6::before{
   background:linear-gradient(to left,#1a1a1a,#313131,#1a1a1a);
   color: white;
   width: 220px;
+  height: 100%;
   padding: 20px;
   transition: width 0.3s ease;
   overflow-y: auto;
+  
 }
 .admin-sidebar.closed {
   width: 0;

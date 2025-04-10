@@ -4,3 +4,13 @@
     min-height:60% ;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
+
+/* for manage users */
+.table {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .container {
+    max-width: 900px;
+  }
+  

@@ -14,7 +14,7 @@ function Home() {
   };
   return (<>
     <div >
-  <div id="carouselExampleControls" className="carousel slide sld mt-5" data-bs-ride="carousel">
+  <div id="carouselExampleControls" className="carousel slide sld " data-bs-ride="carousel">
     <div className="carousel-inner">
       <div className="carousel-item active position-relative i1">
         <img
@@ -45,7 +45,7 @@ function Home() {
         <div className="ig1 ">
       <h2 >The <big><b>Best Fitness System</b></big><br/>in Market</h2>
       <p>This System includes various activities system gives suggestion as per your requirement.To Know More information register or Login here </p>
-       <button type="button" onClick={handleClick}  > Know More</button>
+       <button type="button" onClick={handleClick}  className="bt btn btn-danger" > Know More</button>
      </div>
       </div>
 
