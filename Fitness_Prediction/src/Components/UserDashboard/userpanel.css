@@ -1,0 +1,6 @@
+.cont{
+    margin: auto;
+    width: 60%;
+    min-height:60% ;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}

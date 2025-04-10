@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import Workouts from "./Workouts"; // Import Workouts Component
 import logo from '../assets/project_logo.png';
 
 
 const Navbarn = ({ userRole }) => {
-  const [workouts, setWorkouts] = useState([]);
-
- 
-  useEffect(() => {
-    setWorkouts(Workouts()); // Assuming Workouts.jsx returns an array
-  }, []);
-
+  
   return (<>
     
   <div>
@@ -19,12 +12,12 @@ const Navbarn = ({ userRole }) => {
       <div className="container-fluid">
         {/* Brand */}
         <NavLink className="navbar-brand fw-bold text-light" to="/">
-          <img src={logo} style={{width:"50px", height:"50px"}}></img>Fitness Tracker
+          <img src={logo} style={{width:"4rem", height:"4rem"}}></img>Fitness Tracker
         </NavLink>
 
         {/* Toggle Button for Mobile */}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon " style={{ filter: "invert(1)"}}></span>
         </button>
 
         {/* Navbar Links */}
@@ -35,38 +28,7 @@ const Navbarn = ({ userRole }) => {
               <NavLink className="nav-link text-light" to="/">Home</NavLink>
             </li>
 
-            {/* Workouts Dropdown (Dynamic List) */}
-            <li className="nav-item dropdown ">
-              <a className="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown">
-                Workouts
-              </a>
-              <ul className="dropdown-menu bg-dark">
-                {workouts.length > 0 ? (
-                  workouts.map((workout, index) => (
-                    <li key={index}>
-                      <NavLink className="dropdown-item text-light " to={`/workout/${workout.toLowerCase()}`}>
-                        {workout}
-                      </NavLink>
-                    </li>
-                  ))
-                ) : (
-                  <li className="dropdown-item text-muted text-light">No workouts available</li>
-                )}
-              </ul>
-            </li>
-
-            {/* Predictions Dropdown (Only for User) */}
-            {userRole === "user" && (
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
-                  Predictions
-                </a>
-                <ul className="dropdown-menu bg-dark">
-                  <li><NavLink className="dropdown-item text-light" to="/predictions/calories">Calories Burned</NavLink></li>
-                  <li><NavLink className="dropdown-item text-light" to="/predictions/workout-plan">Workout Plan</NavLink></li>
-                </ul>
-              </li>
-            )}
+         
 
             {/* History (Only for User) */}
             {userRole === "user" && (

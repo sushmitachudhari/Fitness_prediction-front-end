@@ -1,56 +1,68 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./style.css"; // Import CSS
+import "./style.css";
+import axios from "axios";
+import { IoMdCloseCircle } from "react-icons/io";
 
 function UserLogin() {
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Handle input changes
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (user.username === "" || user.password === "") {
-      setError("Both fields are required!");
-      return;
-    }
+    try {
+      const response = await axios.post("http://localhost:8080/user/login", user);
+      const message = response.data;
 
-    if (user.username !== "user" || user.password !== "user123") {
-      setError("Invalid username or password!");
-      return;
+      if (message.includes("success")) {
+        navigate("/users/login/user-dashboard"); // change as per your route
+      } else {
+        setError(message);
+      }
+    } catch (err) {
+      setError("Server error. Please try again.");
+      console.error(err);
     }
-
-    setError("");
-    alert("Login Successful! Redirecting to User Dashboard");
-    navigate("/users/login/user-dashboard");
   };
 
   return (
     <div className="user-login-page mt-lg-5">
-      <div className="login-container">
-        <div className="login-form-section">
+
+      <div className="login-container position-relative">
+
+      <IoMdCloseCircle
+                    size={28}
+                    className="position-absolute"
+                    style={{ top: "2%", right: "2%", cursor: "pointer", color: "red" }}
+                    onClick={() => navigate(-1)} />
+        <div className="login-form-section ">
+        
           <div className="login-card">
             <h2 className="text-center mb-4">User Login</h2>
-
+            
             {error && (
               <div className="alert alert-danger text-center">{error}</div>
             )}
 
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label className="form-label">Username</label>
+                <label className="form-label">Email</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="username"
-                  value={user.username}
+                  name="email"
+                  value={user.email}
                   onChange={handleChange}
-                  placeholder="Enter user username"
+                  placeholder="Enter your email"
                 />
               </div>
 
@@ -62,12 +74,14 @@ function UserLogin() {
                   name="password"
                   value={user.password}
                   onChange={handleChange}
-                  placeholder="Enter user password"
+                  placeholder="Enter your password"
                 />
               </div>
-
-              <button type="submit" className="btn bg-black text-light w-100 fw-bold" >
-                Login
+              <center><a href="/users/login">already have Login?</a><a href="/users/register">register</a></center>
+              <button
+                type="submit"
+                className="btn bg-black text-light w-100 fw-bold"
+              >Login
               </button>
             </form>
           </div>
@@ -82,4 +96,3 @@ function UserLogin() {
 }
 
 export default UserLogin;
-

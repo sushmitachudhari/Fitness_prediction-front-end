@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { Link, Outlet, useNavigate,useLocation } from "react-router-dom";
 import "./style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments,faEyeSlash,faSignOut, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faChild,faEyeSlash,faFire,faSignOut, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 const UserDashBoard = () => {
+
+  
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     navigate("/users/login");
+    localStorage.removeItem("userName");
   };
 const location = useLocation();
   const getPageTitle = (pathname) => {
@@ -53,7 +56,9 @@ const location = useLocation();
             <hr className="sidebar-divider" />
             <p><Link to="workout-plans"><FontAwesomeIcon icon={faEyeSlash} className="me-2"></FontAwesomeIcon>See Workout Plans</Link></p>
             <hr className="sidebar-divider" />
-            <p><Link to="give-feedback"><FontAwesomeIcon icon={faComments} className="me-2"></FontAwesomeIcon>Feedback</Link></p>
+            <p><Link to="choose-workout"><FontAwesomeIcon icon={faChild} className="me-2"></FontAwesomeIcon>Choose Workout</Link></p>
+            <hr className="sidebar-divider" />
+            <p><Link to="calories-burn"><FontAwesomeIcon icon={faFire} className="me-2"></FontAwesomeIcon>Calories Burn</Link></p>
             
           </div>
           <hr className="sidebar-divider" />
@@ -61,7 +66,7 @@ const location = useLocation();
         </div>
 
         <div className={`user-content ${sidebarOpen ? "shifted" : ""}`}>
-          <div className="page-title ">
+          <div className="page-title text-end">
             {currentPage}
           </div>
           <Outlet />

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./style.css"; // Import CSS
+import "./style.css";
+import axios from "axios";
+import { IoMdCloseCircle } from "react-icons/io";
 
 function AdminLogin() {
   const [admin, setAdmin] = useState({ username: "", password: "" });
@@ -12,34 +14,48 @@ function AdminLogin() {
     setAdmin({ ...admin, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (admin.username === "" || admin.password === "") {
+    const { username, password } = admin;
+
+    if (!username || !password) {
       setError("Both fields are required!");
       return;
     }
 
-    if (admin.username !== "admin" || admin.password !== "admin123") {
-      setError("Invalid username or password!");
-      return;
-    }
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/admin/login/${username}/${password}`
+      );
 
-    setError("");
-    alert("Login Successful! Redirecting to Admin Dashboard");
-    navigate("/account/admin/admin-dashboard");
+      if (response.data.includes("success")) {
+        setError("");
+        navigate("/account/admin/admin-dashboard");
+      } else {
+        setError("Invalid username or password!");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Server error. Please try again.");
+    }
   };
 
   return (
     <div className="admin-login-page mt-lg-5">
-      <div className="login-container">
+      <div className="login-container position-relative">
+        <IoMdCloseCircle
+          size={28}
+          className="position-absolute"
+          style={{ top: "2%", right: "2%", cursor: "pointer", color: "red" }}
+          onClick={() => navigate(-2)}
+        />
+
         <div className="login-form-section">
           <div className="login-card">
             <h2 className="text-center mb-4">Admin Login</h2>
 
-            {error && (
-              <div className="alert alert-danger text-center">{error}</div>
-            )}
+            {error && <div className="alert alert-danger text-center">{error}</div>}
 
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
@@ -66,7 +82,10 @@ function AdminLogin() {
                 />
               </div>
 
-              <button type="submit" className="btn bg-black text-light w-100 fw-bold" >
+              <button
+                type="submit"
+                className="btn bg-black text-light w-100 fw-bold"
+              >
                 Login
               </button>
             </form>
