@@ -11,13 +11,20 @@ import AdminDashBoard from "./Components/AdminDashBoard";
 import UserDashBoard from "./Components/UserDashBoard";
 import UpdateProfile from "./Components/UserDashboard/UpdateProfile";
 import ManageUser from "./Components/AdminDashBoardOp/ManageUser";
+import AddWorkOut from "./Components/AdminDashBoardOp/AddWorkOut";
+import ViewWorkout from "./Components/AdminDashBoardOp/ViewWorkout"
+import AddWorkoutCalories from "./Components/AdminDashBoardOp/AddWorkoutCalories";
+import ManageWorkoutCalories from "./Components/AdminDashBoardOp/ManageWorkoutCalories";
+import UpdateWorkoutCalories from "./Components/AdminDashBoardOp/UpdateWorkoutCalories";
+import FillWorkoutForm from "./Components/UserDashboard/FillWorkoutForm";
+import ViewProfile  from "./Components/UserDashboard/ViewProfile";
 
 function AppContent() {
   const location = useLocation();
   const [userRole, setUserRole] = useState("user"); // or "admin"
 
   // Routes where you want to hide the navbar
-  const hideNavbarRoutes = ["/", "/history","/predictions/calories","/predictions/workout-plan","/history","/account/admin","/users/register","/users/login"];
+  const hideNavbarRoutes = ["/", "/history ","/viewWorkouts","/account/admin","/users/register","/users/login","/users/login/"];
   
   hideNavbarRoutes.sty
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
@@ -28,24 +35,23 @@ function AppContent() {
       {shouldHideNavbar && <Navbarn userRole={userRole} />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/predictions/calories" element={<h1>Calories Burned</h1>} />
-        <Route path="/predictions/workout-plan" element={<h1>Workout Plan</h1>} />
-        <Route path="/history" element={<><br /><br /><br /><h3>History</h3></>} />
+        <Route path="/viewWorkouts" element={<><br /><br /><br /><h3>History<br></br> View Workout</h3></>} />
         <Route path="/account/admin" element={<AdminLogin />} />
         <Route path="/account/admin/admin-dashboard" element={<AdminDashBoard />}>
    <Route path="manage-users" element={<ManageUser/>} />
-  <Route path="add-workout" element={<h3>add-workout</h3>} />
-  <Route path="view-workouts" element={<h3>view-workout</h3>} />
-  <Route path="add-workout-calories" element={<h3>add-workout-calories</h3>} />
-  <Route path="manage-workout-calories" element={<h3>manage-workout-calories</h3>} />
+  <Route path="add-workout" element={<AddWorkOut/>} />
+  <Route path="view-workouts" element={<ViewWorkout/>} />
+  <Route path="add-workout-calories" element={<AddWorkoutCalories/>} />
+  <Route path="manage-workout-calories" element={<ManageWorkoutCalories/>} />
+  <Route path="manage-workout-calories/updateWorkoutCalories/:recordid" element={<UpdateWorkoutCalories />} />
   <Route path="suggest-plan-foruser" element={<h3>SuggestPlan for User</h3>}/>
  
 </Route>
-         <Route path="/workout/running" element={<h2>WorkOutpage running</h2>}></Route>
-           <Route path="/users/login/user-dashboard" element={<UserDashBoard/>} >
+          <Route path="/users/login/user-dashboard" element={<UserDashBoard/>} >
            <Route path="update-profile" element={<UpdateProfile/>}/>
+           <Route path="viewprofile" element={<ViewProfile/>}/>
            <Route path="workout-plans" element={<h3>See WorkOut Plans</h3>} />
-           <Route path="choose-workout" element={<h3>choose workout here</h3>} />
+           <Route path="fill-workout-form" element={<FillWorkoutForm/>} />
            <Route path="calories-burn" element={<h3>Calories Burn</h3>}/>
           </Route>
 

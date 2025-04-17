@@ -31,11 +31,11 @@ const Navbarn = ({ userRole }) => {
          
 
             {/* History (Only for User) */}
-            {userRole === "user" && (
+           
               <li className="nav-item">
-                <NavLink className="nav-link text-light" to="/history">History</NavLink>
+                <NavLink className="nav-link text-light" to="/viewWorkouts">View Workouts</NavLink>
               </li>
-            )}
+          
 
           
 <li className="nav-item dropdown">
