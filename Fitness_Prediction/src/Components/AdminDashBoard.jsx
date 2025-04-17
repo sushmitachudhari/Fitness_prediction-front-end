@@ -20,6 +20,7 @@ const AdminDashBoard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [workoutMenuOpen, setWorkoutMenuOpen] = useState(false);
+  const [WorkCalOpen,setWorkCalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -57,7 +58,7 @@ const AdminDashBoard = () => {
       <div className="admin-body">
         <div className={`admin-sidebar ${sidebarOpen ? "open" : "closed"}`}>
 
-          {/* User Menu */}
+          {/* User Menu # */}
           <div className="sidebar-section">
             <div
               className="sidebar-category"
@@ -89,17 +90,17 @@ const AdminDashBoard = () => {
           <div className="sidebar-section">
             <div
               className="sidebar-category"
-              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              onClick={() => setWorkCalOpen(!WorkCalOpen)}
             ><FontAwesomeIcon icon={faFire} className="me-2" />
-              WorkOut Calaries  {userMenuOpen ? "▾" : "▸"}
+              WorkOut Calories  {WorkCalOpen ? "▾" : "▸"}
             </div>
-            <ul className={`submenu ${userMenuOpen ? "open" : ""}`}>
+            <ul className={`submenu ${WorkCalOpen ? "open" : ""}`}>
               <li><Link to="add-workout-calories">   <FontAwesomeIcon icon={faPlus} className="me-2" />Add Workout Calories</Link></li>
               <li><Link to="manage-workout-calories"><FontAwesomeIcon icon={faTasks} className="me-2" />Manage Workout Calories</Link></li>
             </ul>
           </div>
-          <hr className="sidebar-divider" />
-          <p className="sc"><Link to="suggest-plan-foruser"><FontAwesomeIcon icon={faClipboardList} className="me-2"></FontAwesomeIcon>Suggest Plan</Link></p>
+          {/* <hr className="sidebar-divider" />
+          <p className="sc"><Link to="suggest-plan-foruser"><FontAwesomeIcon icon={faClipboardList} className="me-2"></FontAwesomeIcon>Suggest Plan</Link></p> */}
 
           <hr className="sidebar-divider" />
           <div className="sidebar-category" onClick={handleLogout}><FontAwesomeIcon icon={faSignOut} className="me-2"></FontAwesomeIcon>Logout</div>

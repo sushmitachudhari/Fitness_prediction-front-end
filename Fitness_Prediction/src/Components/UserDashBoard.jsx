@@ -1,37 +1,49 @@
-import React, { useState } from "react";
-import { Link, Outlet, useNavigate,useLocation } from "react-router-dom";
+import React, { useState,useEffect } from "react";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import "./style.css";
+import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChild,faEyeSlash,faFire,faSignOut, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faChild, faEyeSlash, faFire, faSignOut, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 const UserDashBoard = () => {
-
-  
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [userName, setUserName] = useState();
+
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const email = localStorage.getItem("userEmail");
+      if (email) {
+        try {
+          const res = await axios.get(`http://localhost:8080/user/getuser/${email}`);
+          setUserName(res.data.name); // Update name from API
+        } catch (err) {
+          console.error("Error fetching user data:", err);
+        }
+      }
+    };
+    fetchUser();
+  }, []);
+   // Fetch user name
 
   const handleLogout = () => {
+     localStorage.removeItem("userName");
     navigate("/users/login");
-    localStorage.removeItem("userName");
   };
-const location = useLocation();
+
   const getPageTitle = (pathname) => {
     const parts = pathname.split("/").filter((part) => part !== "");
-  
-    // Find the index of "admin-dashboard"
     const adminIndex = parts.findIndex(part => part.toLowerCase().includes("dashboard"));
-  
-    // Get only parts after "admin-dashboard"
     const relevantParts = adminIndex >= 0 ? parts.slice(adminIndex) : parts;
-    const capitalizeWords = (str) => {
-      return str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');  
-      };
-    const formattedParts = relevantParts.map(capitalizeWords); 
-    return formattedParts.join(" / ");
+    const capitalizeWords = (str) => str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    return relevantParts.map(capitalizeWords).join(" / ");
   };
+
   const currentPage = getPageTitle(location.pathname);
 
-    return (
+  return (
     <div className="user-container">
       {/* Top Navbar */}
       <div className="user-navbar">
@@ -43,26 +55,30 @@ const location = useLocation();
             alt="avatar"
             style={{ width: "40px", height: "40px" }}
           />
-          <h5 className="sidebar-title justify-content-center align-items-center">User Panel</h5>
-        </div>      
+          <a href="viewprofile" className="text-decoration-none">
+          <h5 className="sidebar-title text-light  justify-content-center align-items-center" >
+            {userName}
+          </h5>
+          </a>
+          
+
+        </div>
       </div>
 
       {/* Sidebar + Main Content */}
       <div className="user-body">
         <div className={`user-sidebar ${sidebarOpen ? "open" : "closed"}`}>
-  
           <div className="sidebar-section sc">
-            <p><Link to="update-profile"><FontAwesomeIcon icon={faUserEdit} className="me-2"></FontAwesomeIcon>Update Profile</Link></p>
+            <p><Link to="fill-workout-form"><FontAwesomeIcon icon={faChild} className="me-2" />Fill Workout Form</Link></p>
             <hr className="sidebar-divider" />
-            <p><Link to="workout-plans"><FontAwesomeIcon icon={faEyeSlash} className="me-2"></FontAwesomeIcon>See Workout Plans</Link></p>
+            <p><Link to="workout-plans"><FontAwesomeIcon icon={faEyeSlash} className="me-2" />See Workout Plans</Link></p>
             <hr className="sidebar-divider" />
-            <p><Link to="choose-workout"><FontAwesomeIcon icon={faChild} className="me-2"></FontAwesomeIcon>Choose Workout</Link></p>
-            <hr className="sidebar-divider" />
-            <p><Link to="calories-burn"><FontAwesomeIcon icon={faFire} className="me-2"></FontAwesomeIcon>Calories Burn</Link></p>
-            
+            <p><Link to="calories-burn"><FontAwesomeIcon icon={faFire} className="me-2" />See Calories Burn</Link></p>
           </div>
           <hr className="sidebar-divider" />
-          <div className="sidebar-category" onClick={handleLogout}><FontAwesomeIcon icon={faSignOut} className="me-2"></FontAwesomeIcon>Logout</div>
+          <div className="sidebar-category" onClick={handleLogout}>
+            <FontAwesomeIcon icon={faSignOut} className="me-2" />Logout
+          </div>
         </div>
 
         <div className={`user-content ${sidebarOpen ? "shifted" : ""}`}>

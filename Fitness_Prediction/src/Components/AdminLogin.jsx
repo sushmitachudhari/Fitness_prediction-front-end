@@ -48,7 +48,7 @@ function AdminLogin() {
           size={28}
           className="position-absolute"
           style={{ top: "2%", right: "2%", cursor: "pointer", color: "red" }}
-          onClick={() => navigate(-2)}
+          onClick={() => navigate(-1)}
         />
 
         <div className="login-form-section">

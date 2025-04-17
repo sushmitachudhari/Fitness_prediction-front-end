@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./AdminPanel.css"; // Optional: Add styling if needed
+import "./AdminPanel.css";
 
 const ViewUsers = () => {
   const [users, setUsers] = useState([]);
@@ -12,18 +12,15 @@ const ViewUsers = () => {
       .catch(error => console.error("Error fetching users:", error));
   }, []);
 
-  // Handle delete user
-  const handleDelete = async (userId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
-    if (!confirmDelete) return;
-
+  // Handle suggest plan to user
+  const suggestPlan = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8080/admin/deleteuser/${userId}`);
-      setUsers(users.filter(user => user.userid !== userId));
-      alert("User deleted successfully.");
+      const response = await axios.get(`http://localhost:8080/admin/suggest/${userId}`);
+      alert(response.data); // Shows backend response message
     } catch (error) {
-      console.error("Error deleting user:", error);
-      alert("Failed to delete user.");
+      console.error("Error suggesting plan:", error);
+      const message = error.response?.data || "Failed to suggest a plan for the user";
+      alert(message);
     }
   };
 
@@ -38,7 +35,7 @@ const ViewUsers = () => {
             <th>Email</th>
             <th>Height</th>
             <th>Weight</th>
-            <th>Actions</th>
+            <th>Suggest Plan</th>
           </tr>
         </thead>
         <tbody>
@@ -47,19 +44,19 @@ const ViewUsers = () => {
               <td colSpan="6" className="text-center">No users found.</td>
             </tr>
           ) : (
-            users.map(user => (
+            users.map((user,index) => (
               <tr key={user.userid}>
-                <td>{user.userid}</td>
+                <td>{index+1}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.height}</td>
                 <td>{user.weight}</td>
                 <td>
                   <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(user.userid)}
+                    className="btn btn-success btn-sm"
+                    onClick={() => suggestPlan(user.userid)}
                   >
-                    Delete
+                    Recommend Plan
                   </button>
                 </td>
               </tr>

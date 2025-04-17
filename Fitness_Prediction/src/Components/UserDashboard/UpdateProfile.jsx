@@ -1,78 +1,122 @@
-import React, { useState } from "react";
-import "./userpanel.css";
+import React, { useState, useEffect } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-import { useNavigate, useParams } from "react-router-dom";
+import "./userpanel.css";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function UpdateProfile() {
-    const navigate = useNavigate();
-    const { id } = useParams(); // Get user ID from route
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        password: "",
-        height: "",
-        weight: ""
-    });
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    height: "",
+    weight: ""
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.put(`http://localhost:8080/update/${id}`, formData); // Adjust port if needed
-            alert("User Updated Successfully");
-            navigate("/users/login/user-dashboard");
-        } catch (error) {
-            console.error("Update failed", error);
-            alert("Update failed. Please try again.");
+  const [userId, setUserId] = useState(null); // store userId separately
+
+  // 🔁 Fetch user data on mount
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+    if (email) {
+      axios.get(`http://localhost:8080/user/getuser/${email}`)
+        .then(res => {
+          const user = res.data;
+          setFormData({
+            name: user.name || "",
+            email: user.email || "",
+            password: user.password || "",
+            height: user.height || "",
+            weight: user.weight || ""
+          });
+          setUserId(user.userid); // Set userId for update call
+        })
+        .catch(err => {
+          console.error("Error fetching user data:", err);
+          alert("Failed to load user profile");
+        });
+    } else {
+      alert("User not logged in.");
+      navigate("/users/login");
+    }
+  }, []);
+
+  // 🖊️ Handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // ✅ Update user profile
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!userId) {
+      alert("User ID not found.");
+      return;
+    }
+
+    try {
+      const res = await axios.put(`http://localhost:8080/user/update/${userId}`, formData, {
+        headers: {
+          "Content-Type": "application/json"
         }
-    };
+      });
+      alert("Profile updated successfully!");
+      localStorage.setItem("userName", formData.name);
+      navigate(-1);
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      alert("Failed to update profile");
+    }
+  };
 
-    return (
-        <div className="cont position-relative">
-            <div className="head d-flex justify-content-between w-100 text-dark fw-bolder">
-                <h4 className="pt-3 ps-3 text-center">Update Profile</h4>
-                <IoMdCloseCircle
-                    size={28}
-                    className="position-absolute"
-                    style={{ top: "2%", right: "2%", cursor: "pointer", color: "#dc3545" }}
-                    onClick={() => navigate(-1)} />
-            </div>
-            <form onSubmit={handleSubmit} className="p-5 col-12">
-                <div className="form-floating mb-3">
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} className="form-control" placeholder="Enter Name Here" id="nameInput" />
-                    <label htmlFor="nameInput">Name</label>
-                </div>
+  return (
+    <div className="cont ">
+      <div className="head d-flex justify-content-between w-100 text-dark fw-bolder position-relative">
+        <h4 className="pt-2 ps-3 text-center">Update Profile</h4>
+        <IoMdCloseCircle
+          size={28}
+          className="position-absolute"
+          style={{ top: "2%", right: "2%", cursor: "pointer", color: "#dc3545" }}
+          onClick={() => navigate(-1)} />
+      </div>
 
-                <div className="form-floating mb-3">
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} className="form-control" id="emailInput" placeholder="name@example.com" />
-                    <label htmlFor="emailInput">Email address</label>
-                </div>
-
-                <div className="form-floating mb-3">
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} className="form-control" id="passwordInput" placeholder="Enter your password" />
-                    <label htmlFor="passwordInput">Password</label>
-                </div>
-
-                <div className="form-floating mb-3">
-                    <input type="text" name="height" value={formData.height} onChange={handleChange} className="form-control" id="heightInput" placeholder="Enter your height" />
-                    <label htmlFor="heightInput">Height (cm)</label>
-                </div>
-
-                <div className="form-floating mb-3">
-                    <input type="text" name="weight" value={formData.weight} onChange={handleChange} className="form-control" id="weightInput" placeholder="Enter your weight" />
-                    <label htmlFor="weightInput">Weight (kg)</label>
-                </div>
-
-                <div className="d-grid">
-                    <button type="submit" className="btn bg-black text-light">Update</button>
-                </div>
-            </form>
+      <form className="pt-2 ps-5 pe-5 pb-5 col-12" onSubmit={handleSubmit}>
+        <div className="form-floating mb-3">
+          <input type="text" name="name" className="form-control" placeholder="Name" value={formData.name} onChange={handleChange} />
+          <label>Name</label>
         </div>
-    );
+
+        <div className="form-floating mb-3">
+          <input type="email" name="email" className="form-control" placeholder="Email" value={formData.email} onChange={handleChange} readOnly />
+          <label>Email</label>
+        </div>
+
+        <div className="form-floating mb-3">
+          <input type="password" name="password" className="form-control" placeholder="Password" value={formData.password} onChange={handleChange} />
+          <label>Password</label>
+        </div>
+
+        <div className="d-flex gap-3">
+          <div className="form-floating mb-3 w-100">
+            <input type="text" name="height" className="form-control" placeholder="Height" value={formData.height} onChange={handleChange} />
+            <label>Height (cm)</label>
+          </div>
+
+          <div className="form-floating mb-3 w-100">
+            <input type="text" name="weight" className="form-control" placeholder="Weight" value={formData.weight} onChange={handleChange} />
+            <label>Weight (kg)</label>
+          </div>
+        </div>
+
+        <div className="d-grid">
+          <button type="submit" className="btn bg-black text-light">Update</button>
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default UpdateProfile;
