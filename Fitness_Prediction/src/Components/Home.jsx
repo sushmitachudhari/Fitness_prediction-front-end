@@ -1,17 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap
 import "./style.css"; // Import additional styles
-import Footer from "./Footer";
 import WorkoutSlider from "./WorkoutSlider";
-import TestimonialSection from "./TestimonialSection";
-import FeatureCards from "./FeatureCard";
+import HomeContent from "./HomeContent";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate=useNavigate();
-  const handleClick = () => {
-    navigate("/users/login");  // Replace with your target route
-  };
   return (<>
     <div >
   <div id="carouselExampleControls" className="carousel slide sld " data-bs-ride="carousel">
@@ -28,7 +23,7 @@ function Home() {
         <div className="ig1 ">
       <h2>The <big><b>Best Fitness System</b></big><br/>in Market</h2>
       <p>This System includes various activities system gives suggestion as per your requirement.To Know More information register or Login here </p>
-       <button type="button" onClick={handleClick}  className=" bt btn btn-danger"> Know More</button>
+      
      </div>
       </div>
      
@@ -45,7 +40,7 @@ function Home() {
         <div className="ig1 ">
       <h2 >The <big><b>Best Fitness System</b></big><br/>in Market</h2>
       <p>This System includes various activities system gives suggestion as per your requirement.To Know More information register or Login here </p>
-       <button type="button" onClick={handleClick}  className="bt btn btn-danger" > Know More</button>
+       {/* <button type="button" onClick={handleClick}  className="bt btn btn-danger" > Know More</button> */}
      </div>
       </div>
 
@@ -60,7 +55,7 @@ function Home() {
         <div className="ig1 ">
       <h2>The <big><b>Best Fitness System</b></big><br/>in Market</h2>
       <p>This System includes various activities system gives suggestion as per your requirement.To Know More information register or Login here </p>
-       <button type="button" onClick={handleClick}   className=" bt btn btn-danger"> Know More</button>
+       {/* <button type="button" onClick={handleClick}   className=" bt btn btn-danger"> Know More</button> */}
      </div>
       </div>
     </div>
@@ -75,10 +70,8 @@ function Home() {
     </button>
   </div>
 </div>
-<FeatureCards/>
-{/* <TestimonialSection/> */}
+<HomeContent/>
       <WorkoutSlider/>
-      <Footer/>
   </>
   );
 }

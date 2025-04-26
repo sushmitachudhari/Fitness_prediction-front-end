@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import img1 from "../assets/img1.webp";
-import img2 from "../assets/img2.webp";
-import img3 from "../assets/img3.jpeg";
-import img4 from "../assets/img4.jpg";
+import axios from "axios";
 
 // Custom arrow components
 const PrevArrow = (props) => {
@@ -19,7 +16,7 @@ const PrevArrow = (props) => {
         zIndex: 1,
         fontSize: "30px",
         cursor: "pointer",
-        color: "#333"
+        color: "#333",
       }}
     >
       ❮
@@ -38,7 +35,7 @@ const NextArrow = (props) => {
         zIndex: 1,
         fontSize: "30px",
         cursor: "pointer",
-        color: "#333"
+        color: "#333",
       }}
     >
       ❯
@@ -47,6 +44,63 @@ const NextArrow = (props) => {
 };
 
 const WorkoutSlider = () => {
+  const [images, setImages] = useState([]);
+  const [workoutTypes, setWorkoutTypes] = useState([]);
+
+  const apiKey = "5Jun9J6pswMlTxnZRiMVNanwzuHCKBam1Q9bAIBYIY6w2fxo90aG9lHB";
+
+  useEffect(() => {
+    const fetchWorkoutTypes = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/admin/workout/view");
+        const workoutNames = response.data.map((item) => item.workout_type_name);
+        setWorkoutTypes(workoutNames);
+      } catch (error) {
+        console.error("Error fetching workout types from the database:", error);
+      }
+    };
+
+    fetchWorkoutTypes();
+  }, []);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const allImages = [];
+
+        for (const type of workoutTypes) {
+          const response = await axios.get("https://api.pexels.com/v1/search", {
+            headers: {
+              Authorization: apiKey,
+            },
+            params: {
+              query: type,
+              per_page: 1,
+              page: 1,
+              safe_search: true,
+            },
+          });
+
+          const photos = response.data.photos;
+          if (photos.length > 0) {
+            allImages.push({
+              ...photos[0],
+              workoutType: type,
+            });
+          }
+        }
+
+        setImages(allImages);
+      } catch (error) {
+        console.error("Error fetching images from Pexels:", error);
+      }
+    };
+
+    if (workoutTypes.length > 0) {
+      fetchImages();
+    }
+  }, [workoutTypes]);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -77,38 +131,34 @@ const WorkoutSlider = () => {
     <div className="container mt-4 mb-5">
       <h2 className="text-center mb-4">Workout Gallery</h2>
       <Slider {...settings}>
-        <div>
-          <img
-            src={img1}
-            alt="Workout 1"
-            className="img-fluid p-2"
-            style={{ height: "200px", objectFit: "cover", width: "100%" }}
-          />
-        </div>
-        <div>
-          <img
-            src={img2}
-            alt="Workout 2"
-            className="img-fluid p-2"
-            style={{ height: "200px", objectFit: "cover", width: "100%" }}
-          />
-        </div>
-        <div>
-          <img
-            src={img3}
-            alt="Workout 3"
-            className="img-fluid p-2"
-            style={{ height: "200px", objectFit: "cover", width: "100%" }}
-          />
-        </div>
-        <div>
-          <img
-            src={img4}
-            alt="Workout 4"
-            className="img-fluid p-2"
-            style={{ height: "200px", objectFit: "cover", width: "100%" }}
-          />
-        </div>
+        {images.length > 0 ? (
+          images.map((photo, idx) => (
+            <div key={idx} style={{ position: "relative" }}>
+              <img
+                src={photo.src.medium}
+                alt={photo.workoutType}
+                className="img-fluid p-2"
+                style={{ height: "200px", objectFit: "cover", width: "100%" }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "10px",
+                  left: "10px",
+                  backgroundColor: "rgba(0, 0, 0, 0.6)",
+                  color: "white",
+                  padding: "4px 8px",
+                  borderRadius: "8px",
+                  fontSize: "14px",
+                }}
+              >
+                {photo.workoutType}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div>Loading...</div>
+        )}
       </Slider>
     </div>
   );

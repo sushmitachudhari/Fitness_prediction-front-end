@@ -68,7 +68,7 @@ function ViewProfile() {
   ) : userData ? (
     <div className="row g-3">
       {Object.entries(userData).map(([key, value]) =>
-        key !== "password" && (
+        key !== "password" && key !=="statuss" && (
           <div key={key} className="col-12">
             <div className="bg-transparent w-100 d-flex gap-4">
               <strong className="hf">{formatLabel(key)}</strong>

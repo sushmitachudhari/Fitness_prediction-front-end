@@ -1,23 +1,19 @@
-.cont{
-    margin: auto;
-    width: 60%;
-    min-height:60% ;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
-    
-}
-.pf{
-    font-size: clamp(0.85rem, 1.8vw, 1.1rem);
-}
-.hf{
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    font-weight: bold;
-}
-  
-  .card-body .row > div {
-    transition: transform 0.2s ease;
-    text-wrap: wrap;
+.dialog-box {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    min-width: 300px;
+    text-align: center;
+    font-size: 18px;
+    animation: fadeInOut 2s ease forwards;
   }
-  .card-body .row > div:hover {
-    transform: translateY(-2px);
+  
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -20%); }
+    10% { opacity: 1; transform: translate(-50%, 0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -20%); }
   }
   
