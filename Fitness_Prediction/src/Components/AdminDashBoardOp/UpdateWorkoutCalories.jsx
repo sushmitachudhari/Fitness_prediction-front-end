@@ -22,6 +22,8 @@ function UpdateWorkoutCalories() {
 
   useEffect(() => {
     const loadAllData = async () => {
+      console.log("recordid:", recordid); // ✅ Debugging
+
       try {
         const [workoutsRes, intensityRes, recordRes] = await Promise.all([
           axios.get("http://localhost:8080/admin/workout/view"),
@@ -33,6 +35,13 @@ function UpdateWorkoutCalories() {
         setIntensityLevels(intensityRes.data);
 
         const fetchedData = recordRes.data;
+        console.log("Fetched workout record:", fetchedData); // ✅ Debugging
+
+        if (!fetchedData || !fetchedData.workout_type_id) {
+          alert("Workout record not found or invalid.");
+          navigate("/account/admin/admin-dashboard/manage-workout-calories");
+          return;
+        }
 
         const normalizedData = {
           workout_type_id: fetchedData.workout_type_id || "",
@@ -51,7 +60,7 @@ function UpdateWorkoutCalories() {
     };
 
     loadAllData();
-  }, [recordid]);
+  }, [recordid, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

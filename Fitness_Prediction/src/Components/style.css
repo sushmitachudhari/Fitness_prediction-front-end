@@ -4,19 +4,16 @@
   position: relative;
   z-index: 2;
 }
-
-
 /* Navbar Styling */
 .navb {
   background-color: black !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 10;
-  color: white;
+  color: gray;
  width: 100%;
  position: fixed !important;
  top:0;
- 
 }
 .sld{
   margin-top: 76px !important;
@@ -33,14 +30,15 @@
   pointer-events: none;
 }
 
-/* Carousel container fix */
-
-/* Video/Slider wrapper */
-
 /* Dropdown Styles */
-.dropdown-item:hover {
+.ni:hover{
+  color:#0098CF !important;
+}
+.dropdown-item:hover,
+.dropdown-item:focus,
+ .dropdown-item:active {
   background-color: rgb(5, 4, 4);
-  color: #ff2d55 !important;
+  color: #0098CF !important;
 }
 
 .dropdown:hover > .dropdown-menu,
@@ -101,141 +99,19 @@ position: relative;
     transform: translateX(0px);
   }
 }
+.hcont{
+  margin-top: 30px !important;
+  background-color: #f5f5f5;
+  box-shadow: 0px 6px 15px 0 rgba(211, 212, 212, 0.75);
+
+}
  footer{
   background-color: #24262b;
   height: 50px;
   color: white;
   line-height: 50px;
   text-align: center;
- 
  }
-/* footer ul li {
-  margin-bottom: 6px;
-}
-
-footer i {
-  transition: color 0.3s;
-}
-
-footer i:hover {
-  color: #e60023;
-}
-footer .coll h5,h6{
-  position: relative;
-  color:white;
-  margin-bottom: 20px;
-}
-footer .coll ul li {
-  color :#bbbbbb;
-}
-footer .coll p{
-  color :#d0cdcd;
-}
-footer .coll ul li{
-  font-size: 15px;
-  display: block;
-  transition: 0.3s ease-in;
-}
-footer .coll ul li:hover {
-  color: white;
-  padding-left:10px ;
-}
-footer .ft{
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  background-color: #303238;
-}
-footer .ft p{
-  padding: 10px;
-  color: #eaeaea;
-}
-footer .coll h5::before , h6::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  background-color: #e91e63;
-  height: 2px;
-  width: 40px;
-}
- .coll .tm{
-  color: #949494 !important;
-} */
-
-
-/* Testimaonial  code */
-/* .testimonial-section {
-  background-color: #f7f7fb;
-}
-
-.testimonial-sub {
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  color: #e74c3c;
-  letter-spacing: 1px;
-  margin-top: 0.5rem;
-}
-
-.testimonial-card {
-  position: relative;
-  background: #fff;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-}
-
-.quote-icon {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #e74c3c;
-  color: white;
-  font-size: 20px;
-  padding: 8px 12px;
-  border-radius: 50%;
-  font-weight: bold;
-} */
-
-/* Feature cards  */
-/* .feature-card {
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-}
-
-.feature-card .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.feature-card .card-content {
-  position: relative;
-  z-index: 2;
-}
-
-.feature-icon {
-  font-size: 3rem;
-  color: white;
-} */
-
-.fc{
-  margin: 40px auto !important;
- background-color: rgb(244, 243, 243);
- box-shadow: 0px 0px 20px rgba(94, 94, 94, 0.4);
-}
 
 /* Admin login */
 .admin-login-page {
@@ -258,7 +134,6 @@ footer .coll h5::before , h6::before{
   background: linear-gradient(to right, #4c4c4c, #3c3c3c, #1e1e1e);
   flex-direction: row;
 }
-
 .login-form-section {
   flex: 1;
   display: flex;
@@ -435,7 +310,6 @@ footer .coll h5::before , h6::before{
   background-image: url('../assets/dmb.jpg');
   background-size: cover;
   background-position: center;
-  
 }
 
 .ur .hh {
@@ -452,7 +326,7 @@ footer .coll h5::before , h6::before{
 
 /* Admin dashboard css */
 .admin-container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -482,16 +356,15 @@ footer .coll h5::before , h6::before{
 .admin-body {
   display: flex;
   height: 100%;
+  background-color: #f6f6f6;
 }
 .admin-sidebar {
-  background:linear-gradient(to left,#1a1a1a,#313131,#1a1a1a);
-  color: white;
+  background:linear-gradient(90deg, #363636 , #363636 );
+  color: rgb(255, 255, 255);
   width: 220px;
-  height: 100%;
   padding: 20px;
   transition: width 0.3s ease;
   overflow-y: auto;
-  
 }
 .admin-sidebar.closed {
   width: 0;
@@ -518,9 +391,8 @@ footer .coll h5::before , h6::before{
   color: white;
  }
 .sidebar-category:hover ,.sc a:hover {
-  color: #1abc9c;
+  color: #05bbfd !important;
 }
-
 .submenu {
   list-style: none;
   padding-left: 15px;
@@ -528,7 +400,6 @@ footer .coll h5::before , h6::before{
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease;
 }
-
 .submenu.open {
   max-height: 500px;
   padding-top: 10px;
@@ -547,26 +418,23 @@ footer .coll h5::before , h6::before{
 
 .submenu li a:hover {
   padding-left: 5px;
-  color: #1abc9c;
+  color: #05bbfd !important;
 }
-
 .admin-content {
   flex: 1;
   padding: 20px;
   transition: margin-left 0.3s ease;
+  min-height: 500px ;
 }
-
 .admin-content.shifted {
   margin-left: 0;
 }
-
 /* user dashboard css */
 .user-container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
-
 .user-navbar {
   display: flex;
   justify-content: space-between;
@@ -575,7 +443,6 @@ footer .coll h5::before , h6::before{
   color: white;
   padding: 10px 20px;
 }
-
 .menu-btn {
   background: none;
   border: none;
@@ -583,36 +450,29 @@ footer .coll h5::before , h6::before{
   font-size: 24px;
   cursor: pointer;
 }
-
 .user-info {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-
-.logout-btn {
-  background: #e74c3c;
-  border: none;
-  padding: 5px 10px;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .user-body {
   display: flex;
   height: 100%;
 }
-
 .user-sidebar {
-  background:linear-gradient(to left,#1a1a1a,#313131,#1a1a1a);
-  color: white;
+  background:linear-gradient(90deg, #363636 , #363636 );
+  color: rgb(255, 255, 255);
   width: 220px;
   padding: 20px;
   transition: width 0.3s ease;
   overflow-y: auto;
 }
+.card{
+  box-shadow: 0px 6px 15px 0 rgba(211, 212, 212, 0.75);
+}
+/* .card:hover{
 
+} */
 .user-sidebar.closed {
   width: 0;
   padding: 0;
@@ -640,7 +500,6 @@ footer .coll h5::before , h6::before{
 .sidebar-category:hover ,.sc a:hover {
   color: #1abc9c;
 }
-
 .submenu {
   list-style: none;
   padding-left: 15px;
@@ -673,9 +532,9 @@ footer .coll h5::before , h6::before{
 .user-content {
   flex: 1;
   padding: 20px;
-  transition: margin-left 0.3s ease;
+  transition: margin-left 0.3s ease; 
+  min-height: 500px;
 }
-
 .user-content.shifted {
   margin-left: 0;
 }
@@ -685,4 +544,31 @@ footer .coll h5::before , h6::before{
   margin-bottom: 20px;
   font-size: 12px !important;
   color: #555;
+}
+.scrollable-dropdown {
+  max-height: 300px; /* shows ~8-9 items */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.scrollable-dropdown:hover{
+  color: #0077ff;
+}
+
+/* Webkit-based browser scrollbar styling */
+.scrollable-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-dropdown::-webkit-scrollbar-track {
+  background: #111; /* dark track */
+  border-radius: 10px;
+}
+
+.scrollable-dropdown::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00ff99, #3399ff); /* gradient */
+  border-radius: 10px;
+}
+
+.scrollable-dropdown::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #00cc88, #0077ff); /* hover effect */
 }

@@ -18,13 +18,18 @@ import ManageWorkoutCalories from "./Components/AdminDashBoardOp/ManageWorkoutCa
 import UpdateWorkoutCalories from "./Components/AdminDashBoardOp/UpdateWorkoutCalories";
 import FillWorkoutForm from "./Components/UserDashboard/FillWorkoutForm";
 import ViewProfile  from "./Components/UserDashboard/ViewProfile";
+import ViewSuggestedPlan from "./Components/UserDashboard/ViewSuggestedPlan";
+import UserHistory from "./Components/UserDashboard/UserHistory";
+import CaloriesBurn from "./Components/UserDashboard/CaloriesBurn";
+import Footer from"./Components/Footer";
+import ViewRequest from "./Components/AdminDashBoardOp/ViewRequest";
 
 function AppContent() {
   const location = useLocation();
   const [userRole, setUserRole] = useState("user"); // or "admin"
 
-  // Routes where you want to hide the navbar
-  const hideNavbarRoutes = ["/", "/history ","/viewWorkouts","/account/admin","/users/register","/users/login","/users/login/"];
+  // Routes where you want to show the navbar
+  const hideNavbarRoutes = ["/","/viewWorkouts","/account/admin","/users/register","/users/login"];
   
   hideNavbarRoutes.sty
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
@@ -37,28 +42,29 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/viewWorkouts" element={<><br /><br /><br /><h3>History<br></br> View Workout</h3></>} />
         <Route path="/account/admin" element={<AdminLogin />} />
-        <Route path="/account/admin/admin-dashboard" element={<AdminDashBoard />}>
+        <Route path="/account/admin/admin-dashboard/" element={<AdminDashBoard />}>
+        <Route path="view-request" element={<ViewRequest/>} />
    <Route path="manage-users" element={<ManageUser/>} />
   <Route path="add-workout" element={<AddWorkOut/>} />
   <Route path="view-workouts" element={<ViewWorkout/>} />
   <Route path="add-workout-calories" element={<AddWorkoutCalories/>} />
   <Route path="manage-workout-calories" element={<ManageWorkoutCalories/>} />
   <Route path="manage-workout-calories/updateWorkoutCalories/:recordid" element={<UpdateWorkoutCalories />} />
-  <Route path="suggest-plan-foruser" element={<h3>SuggestPlan for User</h3>}/>
  
 </Route>
-          <Route path="/users/login/user-dashboard" element={<UserDashBoard/>} >
+          <Route path="/users/login/user-dashboard/" element={<UserDashBoard/>} >
            <Route path="update-profile" element={<UpdateProfile/>}/>
            <Route path="viewprofile" element={<ViewProfile/>}/>
-           <Route path="workout-plans" element={<h3>See WorkOut Plans</h3>} />
+           <Route path="workout-plans" element={<ViewSuggestedPlan/>} />
            <Route path="fill-workout-form" element={<FillWorkoutForm/>} />
-           <Route path="calories-burn" element={<h3>Calories Burn</h3>}/>
+           <Route path="calories-burn" element={<CaloriesBurn/>}/>
+           <Route path="user-history" element={<UserHistory/>} />
           </Route>
 
         <Route path="/users/register" element={<UserRegister />} />
         <Route path="/users/login" element={<UserLogin />} />
-        <Route path="/user-history" element={<h1>User History</h1>} />
       </Routes>
+      <Footer/>
     </>
   );
 }

@@ -20,6 +20,10 @@ function FillWorkoutForm() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
+  const [message, setMessage] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogType, setDialogType] = useState(""); // <-- new (success or danger)
+
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
@@ -31,11 +35,9 @@ function FillWorkoutForm() {
         setIntensityLevels(intensityRes.data);
       } catch (err) {
         console.error("Failed to load dropdown data", err);
-        alert("Failed to load form options.");
       }
 
       const email = localStorage.getItem("userEmail");
-     // alert(email);
       if (!email) {
         alert("User email not found. Please login again.");
       }
@@ -73,11 +75,28 @@ function FillWorkoutForm() {
     setSubmitting(true);
     try {
       const response = await axios.post("http://localhost:8080/user/workoutdetails", formData);
-      alert(response.data);
-      navigate(-1);
+
+      // Success Message
+      setMessage(response.data || "Workout submitted successfully!");
+      setDialogType("success");
+      setShowDialog(true);
+
+      setTimeout(() => {
+        setShowDialog(false);
+        navigate(-1);
+      }, 2000);
+
     } catch (error) {
       console.error("Error submitting data", error);
-      alert("An error occurred while adding the workout.");
+
+      // Error Message
+      setMessage("Error submitting workout. Please try again.");
+      setDialogType("danger");
+      setShowDialog(true);
+
+      setTimeout(() => {
+        setShowDialog(false);
+      }, 2000);
     }
     setSubmitting(false);
   };
@@ -88,6 +107,13 @@ function FillWorkoutForm() {
 
   return (
     <div className="cont">
+      {/* Dialog Box */}
+      {showDialog && (
+        <div className={`dialog-box alert alert-${dialogType}`} role="alert">
+          {message}
+        </div>
+      )}
+
       <div className="head d-flex justify-content-between w-100 text-dark fw-bolder position-relative">
         <h4 className="pt-2 ps-3 text-center">Fill Workout Form</h4>
         <IoMdCloseCircle
@@ -99,19 +125,6 @@ function FillWorkoutForm() {
       </div>
 
       <form className="p-3" onSubmit={handleSubmit}>
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            id="userid"
-            name="userid"
-            placeholder="User ID"
-            value={formData.userid}
-            readOnly
-          />
-          <label htmlFor="userid">User ID</label>
-        </div>
-
         <div className="d-flex justify-content-between">
           <div className="form-floating mb-3" style={{ flexBasis: "48%" }}>
             <select
@@ -152,22 +165,20 @@ function FillWorkoutForm() {
           </div>
         </div>
 
-
-          <div className="form-floating mb-3" >
-            <input
-              type="text"
-              className="form-control"
-              id="duration"
-              name="duration"
-              placeholder="Duration"
-              value={formData.duration}
-              onChange={handleChange}
-              required
-              min={1}
-            />
-            <label htmlFor="duration">Duration (minutes)</label>
-          </div>
-      
+        <div className="form-floating mb-3">
+          <input
+            type="text"
+            className="form-control"
+            id="duration"
+            name="duration"
+            placeholder="Duration"
+            value={formData.duration}
+            onChange={handleChange}
+            required
+            min={1}
+          />
+          <label htmlFor="duration">Duration (minutes)</label>
+        </div>
 
         <div className="d-grid col-6 text-center m-auto">
           <button type="submit" className="btn bg-black text-light" disabled={submitting}>

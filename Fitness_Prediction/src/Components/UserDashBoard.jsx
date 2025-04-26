@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChild, faEyeSlash, faFire, faSignOut, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faChild, faEyeSlash, faFire, faHistory, faHome, faSignOut, faUser, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 const UserDashBoard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -49,12 +49,7 @@ const UserDashBoard = () => {
       <div className="user-navbar">
         <button className="menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>☰</button>
         <div className="user-info d-flex">
-          <img
-            className="rounded-5"
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="avatar"
-            style={{ width: "40px", height: "40px" }}
-          />
+        <FontAwesomeIcon icon={faUser} className="pb-2 justify-content-center align-items-center"></FontAwesomeIcon>
           <a href="viewprofile" className="text-decoration-none">
           <h5 className="sidebar-title text-light  justify-content-center align-items-center" >
             {userName}
@@ -66,14 +61,19 @@ const UserDashBoard = () => {
       </div>
 
       {/* Sidebar + Main Content */}
-      <div className="user-body">
+      <div className="user-body ">
         <div className={`user-sidebar ${sidebarOpen ? "open" : "closed"}`}>
           <div className="sidebar-section sc">
+          <p><Link to="/users/login/user-dashboard/"><FontAwesomeIcon icon={faHome} className="me-2" />Home</Link></p>
+          <hr className="sidebar-divider" />
             <p><Link to="fill-workout-form"><FontAwesomeIcon icon={faChild} className="me-2" />Fill Workout Form</Link></p>
             <hr className="sidebar-divider" />
-            <p><Link to="workout-plans"><FontAwesomeIcon icon={faEyeSlash} className="me-2" />See Workout Plans</Link></p>
+            <p><Link to="workout-plans"><FontAwesomeIcon icon={faEyeSlash} className="me-2" />Recommend Plan</Link></p>
             <hr className="sidebar-divider" />
             <p><Link to="calories-burn"><FontAwesomeIcon icon={faFire} className="me-2" />See Calories Burn</Link></p>
+            <hr className="sidebar-divider" />
+            <p><Link to="user-history"><FontAwesomeIcon icon={faHistory} className="me-2" />Workout History</Link></p>
+         
           </div>
           <hr className="sidebar-divider" />
           <div className="sidebar-category" onClick={handleLogout}>
@@ -85,7 +85,13 @@ const UserDashBoard = () => {
           <div className="page-title text-end">
             {currentPage}
           </div>
-          <Outlet />
+         {location.pathname ==="/users/login/user-dashboard/"?(
+          <div className="home-content">
+            <center><h2>Welcome to dashBoard {userName} !</h2></center>
+             <center><p>This is Your Personal Fitness space.Get started by filling your workout form or exploring suggested plans.</p></center>
+          </div>
+         ):(
+          <Outlet />)}
         </div>
       </div>
     </div>

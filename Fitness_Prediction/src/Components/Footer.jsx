@@ -70,7 +70,7 @@ function Footer() {
 
         
       </div> */}
-          <p>This Website is maintain by &copy; Fitness System 2025 </p>
+          <p style={{color:"lightgrey"}}>This Website is maintain by &copy; Fitness System 2025 </p>
     </footer>
   </>);
 }
