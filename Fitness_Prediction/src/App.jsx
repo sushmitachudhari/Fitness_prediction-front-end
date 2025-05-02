@@ -23,16 +23,19 @@ import UserHistory from "./Components/UserDashboard/UserHistory";
 import CaloriesBurn from "./Components/UserDashboard/CaloriesBurn";
 import Footer from"./Components/Footer";
 import ViewRequest from "./Components/AdminDashBoardOp/ViewRequest";
+import ResetAdminCredentials from "./Components/AdminDashBoardOp/ResetAdminCredentials"
+
 
 function AppContent() {
   const location = useLocation();
   const [userRole, setUserRole] = useState("user"); // or "admin"
 
   // Routes where you want to show the navbar
-  const hideNavbarRoutes = ["/","/viewWorkouts","/account/admin","/users/register","/users/login"];
+  const ARoutes = ["/","/viewWorkouts","/account/admin","/users/register","/users/login","/account/admin/reset"];
   
-  hideNavbarRoutes.sty
-  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+  ARoutes.sty
+  const shouldHideNavbar = ARoutes.includes(location.pathname);
+  const  showFooter =ARoutes.includes(location.pathname) ;
 
   return (
     <>
@@ -42,7 +45,10 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/viewWorkouts" element={<><br /><br /><br /><h3>History<br></br> View Workout</h3></>} />
         <Route path="/account/admin" element={<AdminLogin />} />
-        <Route path="/account/admin/admin-dashboard/" element={<AdminDashBoard />}>
+
+        <Route path="/account/admin/reset" element={<ResetAdminCredentials />} />
+
+        <Route path="/account/admin/admin-dashboard/" element={<AdminDashBoard/>}>
         <Route path="view-request" element={<ViewRequest/>} />
    <Route path="manage-users" element={<ManageUser/>} />
   <Route path="add-workout" element={<AddWorkOut/>} />
@@ -64,7 +70,7 @@ function AppContent() {
         <Route path="/users/register" element={<UserRegister />} />
         <Route path="/users/login" element={<UserLogin />} />
       </Routes>
-      <Footer/>
+     {showFooter && <Footer userRole={userRole}/>}
     </>
   );
 }

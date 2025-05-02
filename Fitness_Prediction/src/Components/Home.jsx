@@ -3,10 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap
 import "./style.css"; // Import additional styles
 import WorkoutSlider from "./WorkoutSlider";
 import HomeContent from "./HomeContent";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const navigate=useNavigate();
+  // const navigate=useNavigate();
   return (<>
     <div >
   <div id="carouselExampleControls" className="carousel slide sld " data-bs-ride="carousel">
@@ -72,6 +71,7 @@ function Home() {
 </div>
 <HomeContent/>
       <WorkoutSlider/>
+      
   </>
   );
 }

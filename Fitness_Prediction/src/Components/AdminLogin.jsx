@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import axios from "axios";
@@ -35,8 +35,8 @@ function AdminLogin() {
 
     if (!password) {
       errors.password = "Password is required.";
-    } else if (password.length < 6) {
-      errors.password = "Password must contain at least 6 characters.";
+    } else if (password.length < 1) {
+      errors.password = "Password must contain at least 4 characters.";
     }
 
     setFieldErrors(errors);
@@ -156,6 +156,12 @@ function AdminLogin() {
                 )}
               </div>
 
+                {/* for resetting username and password */}
+            <div>
+              <Link to="/account/admin/reset" >Forgot username and password</Link>
+            </div>
+			
+		
               <button type="submit" className="btn bg-black text-light w-100 fw-bold">
                 Login
               </button>

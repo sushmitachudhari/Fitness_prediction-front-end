@@ -65,19 +65,16 @@ const AdminDashBoard = () => {
   const location = useLocation();
   const getPageTitle = (pathname) => {
     const parts = pathname.split("/").filter((part) => part !== "");
-
-    // Find the index of "admin-dashboard"
-    const adminIndex = parts.findIndex(part => part.toLowerCase().includes("dashboard"));
-
-    // Get only parts after "admin-dashboard"
-    const relevantParts = adminIndex >= 0 ? parts.slice(adminIndex) : parts;
-    const capitalizeWords = (str) => {
-      return str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    };
-    const formattedParts = relevantParts.map(capitalizeWords);
-    return formattedParts.join(" / ");
+    const adminIndex = parts.findIndex(part => part.toLowerCase() === "admin-dashboard");
+    if (adminIndex === -1) return "Admin Dashboard";
+    
+    const relevantParts = parts.slice(adminIndex); // or adminIndex + 1 for just pages after it
+    return relevantParts
+      .map(str => str.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '))
+      .join(" / ");
   };
-  const currentPage = getPageTitle(location.pathname);
+  
+
 
   return (
     <div className="admin-container">
@@ -148,7 +145,7 @@ const AdminDashBoard = () => {
         {/* Main content */}
         <div className={`admin-content  ${sidebarOpen ? "shifted" : ""}`}>
           <div className="page-title text-end">
-            <p>{currentPage}</p>
+          <p>{getPageTitle(location.pathname)}</p>
           </div>
            {location.pathname ==="/account/admin/admin-dashboard/"?(
                     <div className="home-content ">

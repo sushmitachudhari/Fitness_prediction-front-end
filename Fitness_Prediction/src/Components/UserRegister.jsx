@@ -32,7 +32,9 @@ function UserRegister() {
     if(!user.name.length>3) errors.name="Atleast 3 char must be there";
     if (!user.name.trim()) errors.name = "Name is required.";
     if (!emailRegex.test(user.email)) errors.email = "Invalid email address.";
-    if (!user.password || user.password.length < 6) errors.password = "Password must be at least 6 characters.";
+
+    if (!user.password || user.password.length <1) errors.password = "Password must be at least greater than 1 characters.";
+
     if (!user.height || isNaN(user.height) || user.height <= 0) errors.height = "Height must be a positive number.";
     if (!user.weight || isNaN(user.weight) || user.weight <= 0) errors.weight = "Weight must be a positive number.";
 
