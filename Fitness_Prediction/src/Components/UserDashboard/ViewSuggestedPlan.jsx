@@ -8,6 +8,7 @@ function ViewSuggestedPlan() {
   const [userid, setUserId] = useState(null);
   const [planContent, setPlanContent] = useState("");
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
 
   // Fetch user ID using email
   useEffect(() => {
@@ -53,9 +54,16 @@ function ViewSuggestedPlan() {
     link.click();
   };
 
-  const requestAdmin =()=>{
-    alert("Request for Admin");
-  }
+  // Request admin to suggest a plan
+  const requestAdmin = async () => {
+    try {
+      const res = await axios.post(`http://localhost:8080/user/requestplan/${userid}`);
+      setMessage(res.data);
+    } catch (error) {
+      console.error("Error requesting plan:", error);
+      setMessage("Failed to request plan.");
+    }
+  };
 
   return (
     <div className="cont">
@@ -77,12 +85,15 @@ function ViewSuggestedPlan() {
             <pre className="border p-3 rounded" style={{ whiteSpace: "pre-wrap", background: "#f8f9fa" }}>
               {planContent}
             </pre>
-            <div className="d-flex align-items-center justify-content-center gap-3  mt-3">
+
+            {message && <p className="text-success text-center mt-3">{message}</p>}
+
+            <div className="d-flex align-items-center justify-content-center gap-3 mt-3">
               <button className="btn btn-dark" onClick={downloadPlan}>
                 Download Plan
               </button>
-              <button className="btn btn-dark" onClick={requestAdmin} >
-                Suggest Plan
+              <button className="btn btn-dark" onClick={requestAdmin}>
+                Request Plan
               </button>
             </div>
           </>

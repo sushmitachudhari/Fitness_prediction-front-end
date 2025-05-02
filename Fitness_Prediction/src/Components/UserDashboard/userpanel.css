@@ -1,19 +1,18 @@
 .dialog-box {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2000;
-    min-width: 300px;
-    text-align: center;
-    font-size: 18px;
-    animation: fadeInOut 2s ease forwards;
-  }
-  
-  @keyframes fadeInOut {
-    0% { opacity: 0; transform: translate(-50%, -20%); }
-    10% { opacity: 1; transform: translate(-50%, 0); }
-    90% { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%, -20%); }
-  }
-  
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  min-width: 300px;
+  text-align: center;
+  font-size: 18px;
+  animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -20%); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -20%); }
+}

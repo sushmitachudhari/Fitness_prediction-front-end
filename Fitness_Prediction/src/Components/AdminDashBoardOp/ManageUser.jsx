@@ -25,17 +25,6 @@ const ViewUsers = () => {
     fetchUsers();
   }, []);
 
-  const suggestPlan = async (userId) => {
-    try {
-      const response = await axios.get(`http://localhost:8080/admin/suggest/${userId}`);
-      alert(response.data);
-    } catch (error) {
-      console.error("Error suggesting plan:", error);
-      const message = error.response?.data || "Failed to suggest a plan for the user";
-      alert(message);
-    }
-  };
-
   const updateUserStatus = async (userId, newStatus) => {
     try {
       await axios.put(`http://localhost:8080/admin/updateUserStatus/${userId}/${newStatus}`);
@@ -147,7 +136,7 @@ const ViewUsers = () => {
               <th>Email</th>
               <th>Height</th>
               <th>Weight</th>
-              <th>Suggest Plan</th>
+             
               <th>Status</th>
             </tr>
           </thead>
@@ -164,14 +153,6 @@ const ViewUsers = () => {
                   <td>{user.email}</td>
                   <td>{user.height}</td>
                   <td>{user.weight}</td>
-                  <td>
-                    <button
-                      className="btn btn-outline-info btn-sm rp"
-                      onClick={() => suggestPlan(user.userid)}
-                    >
-                      Recommend Plan
-                    </button>
-                  </td>
                   <td>
   {user.statuss === "Approve" ? (
     <span className="badge bg-success">Approved</span>
@@ -223,5 +204,6 @@ const ViewUsers = () => {
     </div>
   );
 };
+
 
 export default ViewUsers;

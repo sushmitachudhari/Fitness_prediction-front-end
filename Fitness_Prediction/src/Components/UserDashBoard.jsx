@@ -28,9 +28,20 @@ const UserDashBoard = () => {
   }, []);
    // Fetch user name
 
+
+useEffect(()=>{
+  const email=localStorage.getItem('userEmail');
+  if(!email){
+    navigate("/users/login",{replace:true});
+  }
+},[navigate])
+
   const handleLogout = () => {
-     localStorage.removeItem("userName");
-    navigate("/users/login");
+    
+     localStorage.clear();
+    navigate("/users/login",{replace:true});
+    
+
   };
 
   const getPageTitle = (pathname) => {
